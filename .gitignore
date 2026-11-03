@@ -1,0 +1,8 @@
+result*
+cli
+.agda-purifier/
+_build/
+MAlonzo/
+__pycache__/
+*.pyc
+*.log

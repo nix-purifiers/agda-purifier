@@ -1,0 +1,55 @@
+{
+  "compiler": "2.8.0",
+  "entries": [
+    {
+      "git": {
+        "commitObject": null,
+        "leaveDotGit": false,
+        "rev": "4230566d3ae229b6a00258587651ac7bfd38d088",
+        "submodules": false,
+        "url": "https://github.com/UlfNorell/agda-prelude"
+      },
+      "hash": "sha256-ab+KojzRbkUTAFNH5OA78s0F5SUuXTbliai6badveg4=",
+      "path": "sources/0"
+    }
+  ],
+  "extraInputs": [],
+  "inputs": {
+    "proof.agda-lib": {
+      "sha256": "d089b43031f86c4e4f6ad7a086400389c81933eef2f56be061ada0864e76169a"
+    }
+  },
+  "nodes": [
+    {
+      "content": "name: agda-prelude\ninclude: src\n",
+      "dependencies": [],
+      "entry": "sources/0",
+      "file": "agda-prelude.agda-lib",
+      "includes": [
+        "src"
+      ],
+      "name": "agda-prelude",
+      "requests": [],
+      "rev": "4230566d3ae229b6a00258587651ac7bfd38d088",
+      "url": "https://github.com/UlfNorell/agda-prelude"
+    }
+  ],
+  "project": [
+    {
+      "dependencies": [
+        "agda-prelude"
+      ],
+      "file": "proof.agda-lib",
+      "includes": [
+        "."
+      ],
+      "name": "proof",
+      "requests": [
+        "agda-prelude"
+      ]
+    }
+  ],
+  "purifier": "agda",
+  "sdk": "d05be7d9c3129875296acd690c614a611c458a19859bc921dfec6266c93159d4",
+  "version": 1
+}
