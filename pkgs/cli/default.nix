@@ -17,15 +17,15 @@
 stdenvNoCC.mkDerivation {
   pname = "agda-purifier";
   version = "0.1.0";
-  src = ../.;
+  src = ../..;
   nativeBuildInputs = [ makeWrapper ];
   dontBuild = true;
   installPhase = ''
     mkdir -p "$out/bin" "$out/lib/agda-purifier"
-    cp -r agda_purifier nix native "$out/lib/agda-purifier/"
+    cp -r agda_purifier pkgs lib-overlays native "$out/lib/agda-purifier/"
     install -m755 bin/agda-purifier "$out/bin/agda-purifier"
     for file in realize release; do
-      substituteInPlace "$out/lib/agda-purifier/nix/$file.nix" \
+      substituteInPlace "$out/lib/agda-purifier/pkgs/build-agda-project/$file.nix" \
         --replace-fail '@nixpkgs@' '${nixpkgsSrc}' \
         --replace-fail '@purifier@' '${purifierSrc}'
     done

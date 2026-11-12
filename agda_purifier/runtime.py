@@ -12,7 +12,7 @@ def prepare(root, companion):
     state = root / ".agda-purifier"
     state.mkdir(exist_ok=True)
     profile = state / "environment-profile"
-    expression = f"import {json.dumps(os.environ['AGDA_PURIFIER_SDK'] + '/lib/agda-purifier/nix/realize.nix')} {{root={json.dumps(str(root))};lockFile={json.dumps(str(companion))};}}"
+    expression = f"import {json.dumps(os.environ['AGDA_PURIFIER_SDK'] + '/lib/agda-purifier/pkgs/build-agda-project/realize.nix')} {{root={json.dumps(str(root))};lockFile={json.dumps(str(companion))};}}"
     built = subprocess.run(
         [
             "nix",

@@ -25,7 +25,9 @@
   buildCommand ? "agda --build-library",
 }:
 let
-  lock = purifier.checkLock (import ./read-lock.nix { inherit lib; } { inherit src lockFile; });
+  lock = purifier.checkLock (
+    import ../../lib-overlays/default/read-lock.nix { inherit lib; } { inherit src lockFile; }
+  );
   prepared = import ./environment.nix (builtins.removeAttrs scope [
     "gnutar"
     "gzip"
@@ -44,7 +46,7 @@ let
       ]);
   };
   source = runCommand "agda-validated-source" { } ''
-    ${python3}/bin/python3 ${../agda_purifier/validate-project.py} ${nativeResolver}/bin/agda-resolve ${rawSource} ${prepared.libraryFile} ${writeText "agda-project.json" (builtins.toJSON lock.data.project)}
+    ${python3}/bin/python3 ${../../agda_purifier/validate-project.py} ${nativeResolver}/bin/agda-resolve ${rawSource} ${prepared.libraryFile} ${writeText "agda-project.json" (builtins.toJSON lock.data.project)}
     mkdir -p "$out"
     cp -pr ${rawSource}/. "$out/"
   '';

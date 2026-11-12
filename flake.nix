@@ -20,16 +20,16 @@
       overlay = final: prev: {
         agda-purifier = final.lib.makeScope final.newScope (scope: {
           Agda = final.agda.unwrapped;
-          nativeResolver = scope.callPackage ./nix/native.nix { };
-          sdkVersion = import ./nix/sdk-version.nix {
+          nativeResolver = scope.callPackage ./pkgs/build-agda-project/native.nix { };
+          sdkVersion = import ./pkgs/build-agda-project/sdk-version.nix {
             nixpkgsSrc = nixpkgs;
             Agda = scope.Agda;
           };
-          cli = scope.callPackage ./nix/cli.nix {
+          cli = scope.callPackage ./pkgs/cli/default.nix {
             nixpkgsSrc = nixpkgs;
             purifierSrc = purifier;
           };
-          buildAgdaProject = scope.callPackage ./nix/build-project.nix {
+          buildAgdaProject = scope.callPackage ./pkgs/build-agda-project/default.nix {
             purifier = import (purifier + "/nix/lib") { inherit (final) lib; };
           };
         });
@@ -54,7 +54,7 @@
           meta.description = "Lock native Agda libraries";
         };
       });
-      lib.agda-purifier.readLock = import ./nix/read-lock.nix { lib = nixpkgs.lib; };
+      lib.agda-purifier = (nixpkgs.lib.extend (import ./lib-overlays/default)).agda-purifier;
       checks = forAll (
         system:
         let
