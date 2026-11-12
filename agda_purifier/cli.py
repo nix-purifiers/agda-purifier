@@ -90,7 +90,7 @@ def main():
         expression = (
             "import "
             + json.dumps(
-                os.environ["AGDA_PURIFIER_SDK"] + "/lib/agda-purifier/nix/release.nix"
+                os.environ["AGDA_PURIFIER_SDK"] + "/lib/agda-purifier/pkgs/build-agda-project/release.nix"
             )
             + " {root="
             + json.dumps(str(root))

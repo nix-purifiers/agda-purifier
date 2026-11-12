@@ -9,7 +9,7 @@ let
     nixpkgsSrc = (builtins.toPath "@nixpkgs@");
     inherit Agda;
   };
-  builder = pkgs.callPackage ./build-project.nix {
+  builder = pkgs.callPackage ./default.nix {
     inherit
       nativeResolver
       purifier

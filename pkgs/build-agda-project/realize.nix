@@ -10,7 +10,7 @@ let
     inherit Agda;
   };
   lock = purifier.checkLock (
-    import ./read-lock.nix { inherit lib; } {
+    import ../../lib-overlays/default/read-lock.nix { inherit lib; } {
       src = /. + root;
       lockFile = /. + lockFile;
     }

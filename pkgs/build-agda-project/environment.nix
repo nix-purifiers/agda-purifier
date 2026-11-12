@@ -80,7 +80,7 @@ let
         buildInputs = deps;
         preBuild = ''
           { printf '%s\n' "$PWD/${node.file}"; cat ${registration}; } > "$TMPDIR/validation-libraries"
-          ${python3}/bin/python3 ${../agda_purifier/check-metadata.py} ${nativeResolver}/bin/agda-resolve "$PWD" \
+          ${python3}/bin/python3 ${../../agda_purifier/check-metadata.py} ${nativeResolver}/bin/agda-resolve "$PWD" \
             "$TMPDIR/validation-libraries" \
             ${writeText "agda-library.json" (builtins.toJSON node)}
         '';
