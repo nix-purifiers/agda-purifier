@@ -21,6 +21,7 @@
         agda-purifier = final.lib.makeScope final.newScope (scope: {
           Agda = final.agda.unwrapped;
           nativeResolver = scope.callPackage ./pkgs/build-agda-project/native.nix { };
+          javascriptInspector = scope.callPackage ./pkgs/build-agda-project/javascript-inspector.nix { };
           sdkVersion = import ./pkgs/build-agda-project/sdk-version.nix {
             nixpkgsSrc = nixpkgs;
             Agda = scope.Agda;
@@ -69,6 +70,17 @@
           inherit (build.packages) environment project;
           release = build.release;
           cli = self.packages.${system}.default;
+          javascript = import ./tests/javascript.nix { inherit pkgs; };
+          javascript-revision = import ./tests/javascript.nix {
+            inherit pkgs;
+            src = ./tests/fixtures/javascript-revision;
+            expected = 43;
+          };
+          javascript-namespace = import ./tests/javascript.nix {
+            inherit pkgs;
+            src = ./tests/fixtures/javascript-namespace;
+            moduleFile = "Nested/Answer.agda";
+          };
         }
       );
       formatter = forAll (system: (pkgsFor system).nixfmt-tree);
