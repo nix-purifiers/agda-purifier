@@ -5,6 +5,7 @@ let
   Agda = pkgs.agda.unwrapped;
   purifier = import ((builtins.toPath "@purifier@") + "/nix/lib") { inherit lib; };
   nativeResolver = pkgs.callPackage ./native.nix { };
+  javascriptInspector = pkgs.callPackage ./javascript-inspector.nix { inherit Agda; };
   sdkVersion = import ./sdk-version.nix {
     nixpkgsSrc = (builtins.toPath "@nixpkgs@");
     inherit Agda;
@@ -15,6 +16,7 @@ let
       purifier
       sdkVersion
       Agda
+      javascriptInspector
       ;
   };
 in
